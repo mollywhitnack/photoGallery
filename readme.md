@@ -3,5 +3,5 @@
 2. Run serve
 
 ```
-Give the example
+Example
 ```
