@@ -1,1 +1,7 @@
-SigFig photo gallery 
+##SigFig photo gallery 
+1. Git Clone
+2. Run serve
+
+```
+Give the example
+```
