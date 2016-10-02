@@ -35,9 +35,11 @@ font-family: "Open Sans",Helvetica,Arial,sans-serif;
 }
 .image{
   margin-right:5px;
+  margin:3px;
+  border: 2px solid none;
  /* position: absolute;*/
- width:250px;
+  width:250px;
   cursor: pointer;
-  border: 2px solid #000;
+  border: 0px solid #000;
   /*display: inline-block;*/
 }

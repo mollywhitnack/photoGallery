@@ -16,124 +16,119 @@ var images = [
   {url: "./images/12.png"},
 ]
 
-let currImage = null;
+let currImage = null; //image being dragged
 let imgSelected = false;
 let replaceImg = null;
 
 function init(){
     console.log("page Loaded!!");
-
-    //render images in inital order
-    //let imageAr = [];
     renderImages();
+    //window.addEventListener('mouseup', mouseUp, false);
+}
 
+/*function mouseUp()
+{
+    window.removeEventListener('mousemove', mouseMove, true);
+}*/
+
+function renderImages(){
+  currImage = null;
+  imgSelected = false;
+  replaceImg = null;
+  var ref = document.querySelector('.gallery');
+  //remove elements
+  while (ref.firstChild) {
+    ref.removeChild(ref.firstChild);
   }
 
-  function renderImages(){
-    var ref = document.querySelector('.gallery');
-
-    //remove elements
-    //var myNode = document.getElementById("foo");
-    while (ref.firstChild) {
-      ref.removeChild(ref.firstChild);
-    }
-
-    console.log('ref:', ref);
-    //use a map 
-    for(let i=0; i<images.length; i++){
-      let src = images[i].url;
-      console.log('src:', src);
-      let img = document.createElement('img');
-      img.src = src;
-      img.className = "image"
-      img.id = i;
-      img.addEventListener('mouseenter', highlight)
-      img.addEventListener('mouseleave', removeHighlight)
-      img.addEventListener("mousedown" , imgMouseDown , false);
-      ref.appendChild(img);
-    }
+  console.log('ref:', ref);
+  for(let i=0; i<images.length; i++){
+    let src = images[i].url;
+    console.log('src:', src);
+    let img = document.createElement('img');
+    img.src = src;
+    img.className = "image"
+    img.id = i;
+    img.addEventListener('mouseenter', highlight)
+    img.addEventListener('mouseleave', removeHighlight)
+    img.addEventListener("mousedown" , imgMouseDown , false);
+    ref.appendChild(img);
   }
+}
 
-  function clickImage(){
-    console.log('image clicked')
-    //console.log('this:', this);
+function clickImage(){
+  console.log('image clicked')
+  //console.log('this:', this);
+}
+
+function highlight(event){
+  //can set previous image margin to plus n width to create empty space....
+  // then need to re-order image array and re-render(potentially)?
+
+  if(!imgSelected)
+  this.style.border = "2px solid #F05A50";
+
+  if(imgSelected){
+    replaceImg = this;
+    //this.style.marginRight = "260px";
+    this.style.paddingLeft = "260px";
+    console.log("replaceImg:", replaceImg);
   }
+}
 
-  function highlight(event){
-    //can set previous image margin to plus n width to create empty space....
-    // then need to re-order image array and re-render(potentially)?
+function removeHighlight(event){
+  this.style.border = "0px solid #000";
+  //this.style.marginRight = "5px";
+  this.style.paddingLeft = "0px";
 
-    //console.log('highlight this', event);
-    if(!imgSelected)
-    this.style.border = "2px solid #F05A50";
-      //this.style.marginLeft = "250px";
-      //this.style.marginTop = "100px";
-    if(imgSelected){
-      //console.log('replaceImg:', this);
-      //replace highlight with empty square
-      replaceImg = this;
-      this.style.marginRight = "250px";
-      //console.log('replaceImg:', replaceImg);
-      /*let temp = images[parseInt(this.id)];
-      console.log('replace', images[parseInt(this.id)].url, ' with ', images[parseInt(currImage.id)].url )
-      images[parseInt(this.id)].url = images[parseInt(currImage.id)];
-      let first = images.slice(0, parseInt(this.id)-1);
-      let last  = images.slice(parseInt(this.id)-1, images.length);
-      console.log('first:', first);
-      console.log('last:', last);
-      images = first.concat([{'url':'blank'}], last);*/
+}
 
-    }
-  }
+function imgMouseDown () {
+  console.log('mouse down:')
+  stateMouseDown = true;
+  imgSelected = true;
 
-  function removeHighlight(event){
-    this.style.border = "2px solid #000";
-    this.style.marginRight = "5px";
-
-    //console.log('remove highlight this :', event);
-  }
-
-  function imgMouseDown () {
-    console.log('mouse down:')
-    stateMouseDown = true;
-    imgSelected = true;
+  if(currImage === null)
     currImage = this;
-    console.log('set curr image to :', currImage);
-    document.addEventListener ("mousemove" , imgMouseMove , false);
-  }
 
-  function imgMouseMove(event) {
-    var pX = event.pageX+20;
-    var pY = event.pageY;
-    //console.log('move:', currImage);
-    //console.log('event:', event);
-    //console.log('currImage:', currImage);
+  console.log('set curr image to :', currImage);
+  document.addEventListener ("mousemove" , mouseMove , false);
+}
+
+function mouseMove(event) {
+  var pX = event.pageX+20;
+  var pY = event.pageY;
     currImage.style.position = "absolute";
     currImage.style.border="2px solid #F05A50";
     currImage.style.left = pX + "px";
     currImage.style.top = pY + "px";
     document.addEventListener ("mouseup" , imgMouseUp , false);
-  }
-
-  function imgMouseUp (event) {
-      console.log('up:');
-      imgSelected = false;
-      var pX = event.pageX;
-      var pY = event.pageY;
-      console.log('px:', pX);
-      console.log('py:', pY);
-      console.log("old: ", currImage);
-      console.log("new: ", replaceImg)
-      /*let temp = images[0];
-      console.log('temp:', temp);
-      images[0] = images[1];
-      images[1] = temp;*/
-      console.log('images:', images);
-      console.log('swap temp and re-render')
-      renderImages();
-      //console.log('swap' , images[parseInt(currImage.id)], 'with', images[parseInt(replaceImg.id)]);
-      currImage.style.position = "static";
-      document.removeEventListener ("mousemove" , imgMouseMove , false);
-      document.removeEventListener ("mouseup" , imgMouseUp , false);
-  }
   
+}
+
+function imgMouseUp (event) {
+    console.log('up:');
+    //need to shift whole array instead of swap
+    imgSelected = false;
+    console.log("selected image: ", currImage.id);
+    console.log("new position: ", replaceImg.id);
+
+    let selectedImage = parseInt(currImage.id);
+    let newPosition = parseInt(replaceImg.id);
+    let insert = images.splice(selectedImage, 1);
+    console.log('spliced image:', insert)
+    let first  = images.slice(0, newPosition);
+    let last  = images.slice(newPosition, images.length)
+    console.log('first:', first);
+    console.log('last:', last);
+    images = first.concat(insert, last);
+    console.log('new images:', images);
+    /*let temp = images[a];
+    images[a] = images[b];
+    images[b] = temp;*/
+    //console.log('swap' , images[parseInt(currImage.id)], 'with', images[parseInt(replaceImg.id)]);
+    currImage.style.position = "static";
+    document.removeEventListener ("mousemove" , mouseMove , false);
+    document.removeEventListener ("mouseup" , imgMouseUp , false);
+    renderImages();
+}
