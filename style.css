@@ -15,17 +15,25 @@ font-family: "Open Sans",Helvetica,Arial,sans-serif;
   background-color: white;
   border-top: 5px solid #F05A50;
   border-bottom: 1px solid #e9e7e1;
-  padding: 25px;
+  padding: 18px;
   margin-top: -11px;
 }
 .title{
-  color:#8c8c8c;
-  margin-left: 27px;
-  font-size: 20px;
+  color:#002841;
+  margin-left: 80px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
 }
 
 .titleText{
-  margin-left: 70px;
+  position: absolute;
+  margin-left: 35px;
+  margin-top: 5px;
+}
+
+.titleText span{
+  font-weight: 500;
 }
 .gallery{
   padding:20px;
