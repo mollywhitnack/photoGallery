@@ -65,8 +65,10 @@ function highlight(event){
   //can set previous image margin to plus n width to create empty space....
   // then need to re-order image array and re-render(potentially)?
 
-  if(!imgSelected)
-  this.style.border = "2px solid #F05A50";
+  if(!imgSelected){
+    this.style.border = "2px solid #F05A50";
+    //this.style.border = "2px solid #fbfaf9";
+  }
 
   if(imgSelected){
     replaceImg = this;
@@ -77,10 +79,10 @@ function highlight(event){
 }
 
 function removeHighlight(event){
-  this.style.border = "0px solid #000";
-  //this.style.marginRight = "5px";
+  //this.style.border = "2px solid #fbfaf9;";
+  console.log('remove highlight:', this);
+  this.style.border = "2px solid #fbfaf9";
   this.style.paddingLeft = "0px";
-
 }
 
 function imgMouseDown () {
