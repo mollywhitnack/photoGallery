@@ -1,7 +1,8 @@
 ##SigFig photo gallery 
 1. Git Clone
-2. Run serve
-
+2. Run with simple python server
 ```
-Example
+python -m SimpleHTTPServer 8000
 ```
+## Live Demo at:
+[a link](http://mollywhitnack.me/photoGallery/)

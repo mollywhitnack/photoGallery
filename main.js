@@ -57,6 +57,7 @@ function renderImages(){
     };
 
     container.onmouseup = function () {
+      console.log('mouseup');
       selected = null;
       imgSelected = false;
       imgMouseUp(this);
@@ -70,24 +71,33 @@ function renderImages(){
 function highlight(event){
 
   if(!imgSelected){
-    this.childNodes[0].style.border = "2px solid #F05A50";
+    this.childNodes[0].style.border = "3px solid #F05A50";
   }
 
   if(imgSelected && currImage !== this.childNodes[0]){
     replaceImg = this.childNodes[0];
     var pX = event.pageX;
-    var pY = event.pageY;
-    let difference  = pX-this.offsetLeft
-    if(difference < 125)
+    let difference  = pX-this.childNodes[0].offsetLeft
+    if(difference < 125){
+      //this.childNodes[0].style.paddingLeft = "260px";
+      //this.childNodes[0].style.paddingRight = "0px";
       addleft = true;     
-    else
+    }
+    else{
+      //this.childNodes[0].style.paddingRight = "260px";
+      //this.childNodes[0].style.paddingLeft = "0px";
       addleft = false;
+    }
   }
 }
 
 function removeHighlight(event){
-  if(currImage !== this.childNodes[0])
-    this.childNodes[0].style.border = "2px solid #fbfaf9";
+    this.childNodes[0].style.border = "3px solid #fbfaf9";
+  if(currImage !== this.childNodes[0]){
+    //this.childNodes[0].style.paddingLeft = "0px";
+    //this.childNodes[0].style.paddingRight = "0px";
+  }
+
 }
 
 function imgMouseDown (elem) {
@@ -107,6 +117,7 @@ function imgMove(e) {
     y_pos = document.all ? window.event.clientY : e.pageY;
     
     if (selected !== null) {
+        selected.childNodes[0].style.border = "3px solid #F05A50";
         selected.style.position = "absolute";
         selected.style.margin = "0px";
         selected.style.left = x_pos +'px';
@@ -115,6 +126,8 @@ function imgMove(e) {
 }
 
 function imgMouseUp (el) {
+
+
       if(replaceImg && currImage){
         let selectedImage = parseInt(currImage.id);
         let newPosition = parseInt(replaceImg.id);
@@ -130,6 +143,5 @@ function imgMouseUp (el) {
         images = first.concat(insert, last);
         renderImages();
       }
-      
 }
 
