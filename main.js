@@ -76,7 +76,7 @@ function highlight(event){
       addleft = false;
       let pic = this;
       console.log('add right');
-      pic.style.marginRight = "260px";
+      pic.style.paddingRight = "260px";
       /*setTimeout(function(){
         
       }, 100);*/
@@ -91,7 +91,7 @@ function removeHighlight(event){
   //console.log('remove highlight:', this);
   this.style.border = "2px solid #fbfaf9";
   this.style.paddingLeft = "0px";
-  this.style.marginRight = "5px";
+  this.style.paddingRight = "0px";
 }
 
 function imgMouseDown () {
