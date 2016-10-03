@@ -50,8 +50,10 @@ function renderImages(){
     container.className = "drag";
     container.style.position = "static";
 
-    container.addEventListener('mouseover', highlight)
-    container.addEventListener('mouseleave', removeHighlight)
+    container.addEventListener('mousemove', highlight)
+    //onmouse move over for element?
+    container.addEventListener('mouseout', removeHighlight)
+    //mouse out or mouse leave?
 
     container.onmousedown = function () {
     imgMouseDown(this);
@@ -63,8 +65,6 @@ function renderImages(){
       imgSelected = false;
       imgMouseUp(this);
     };
-
-   //container.onmouseover=function(){highlight(this)};
 
     container.appendChild(img)
     ref.appendChild(container);
@@ -88,20 +88,20 @@ function highlight(event){
     if(difference < 125){
       addleft = true;
       let pic = this;
-      this.childNodes[0].style.marginLeft = "260px";      
+      this.childNodes[0].style.paddingLeft = "260px";      
     }
     else{
       addleft = false;
       let pic = this;
-      this.childNodes[0].style.marginRight = "260px";
+      this.childNodes[0].style.paddingRight = "260px";
     }
   }
 }
 
 function removeHighlight(event){
   this.childNodes[0].style.border = "2px solid #fbfaf9";
-  this.childNodes[0].style.marginLeft = "0px";
-  this.childNodes[0].style.marginRight = "0px";
+  this.childNodes[0].style.padingLeft = "0px";
+  this.childNodes[0].style.paddingRight = "0px";
 }
 
 function imgMouseDown (elem) {
