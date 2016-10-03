@@ -4,5 +4,4 @@
 ```
 python -m SimpleHTTPServer 8000
 ```
-## Live Demo at:
-[a link](http://mollywhitnack.me/photoGallery/)
+## Live Demo [here](http://mollywhitnack.me/photoGallery/)
