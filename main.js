@@ -57,7 +57,6 @@ function renderImages(){
     };
 
     container.onmouseup = function () {
-      console.log('mouseup');
       selected = null;
       imgSelected = false;
       imgMouseUp(this);
